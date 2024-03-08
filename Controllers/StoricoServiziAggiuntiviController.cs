@@ -72,6 +72,8 @@ namespace Epicotel.Controllers
             }
             reader.Close();
 
+            //TODO: MOSTRARE LO SCONTRINO CHECKOUT
+
             ViewBag.Checkout = checkout;
 
             return View();
