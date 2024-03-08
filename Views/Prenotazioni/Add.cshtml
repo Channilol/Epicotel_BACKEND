@@ -1,0 +1,64 @@
+﻿@model Epicotel.Models.Prenotazioni
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Aggiungi Prenotazione</h2>
+
+@using (Html.BeginForm("Add", "Prenotazioni", FormMethod.Post, new { @class = "row g-3 needs-validation", novalidate = "true" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdCliente, "Cliente", new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.IdCliente, new SelectList(ViewBag.Clienti, "IdCliente", "Nome"), "Seleziona un cliente", new { @class = $"form-select {(ViewData.ModelState.IsValidField("IdCliente") ? "" : "is-invalid")}" })
+            @Html.ValidationMessageFor(model => model.IdCliente, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdCamera, "Camera", new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.IdCamera, new SelectList(ViewBag.Camere, "IdCamera", "Descrizione"), "Seleziona una camera", new { @class = $"form-select {(ViewData.ModelState.IsValidField("IdCamera") ? "" : "is-invalid")}" })
+            @Html.ValidationMessageFor(model => model.IdCamera, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+            @Html.LabelFor(model => model.IdPensione, "Pensione", new { @class = "control-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdPensione, new SelectList(ViewBag.Pensioni, "IdPensione", "TipoPensione"), "Seleziona una pensione", new { @class = $"form-select {(ViewData.ModelState.IsValidField("IdPensione") ? "" : "is-invalid")}" })
+                @Html.ValidationMessageFor(model => model.IdPensione, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+            </div>
+        </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DataPrenotazione, new { htmlAttributes = new { @class = "form-label" } })
+        <br />
+        @DateTime.Now
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SoggiornoDa, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.EditorFor(model => model.SoggiornoDa, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
+        @Html.ValidationMessageFor(model => model.SoggiornoDa, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SoggiornoA, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.EditorFor(model => model.SoggiornoA, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
+        @Html.ValidationMessageFor(model => model.SoggiornoA, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tariffa, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.EditorFor(model => model.Tariffa, new { htmlAttributes = new { type = "number", @class = $"form-control {(ViewData.ModelState.IsValidField("PartitaIVA") ? "" : "is-invalid")}" } })
+        @Html.ValidationMessageFor(model => model.Tariffa, null, new { @class = "invalid-feedback" })
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-primary mt-3" type="submit">Aggiungi Prenotazione</button>
+    </div>
+}

@@ -1,0 +1,24 @@
+﻿@model Epicotel.Models.StoricoServiziAggiuntivi
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Scegli la prenotazione da portare al Checkout:</h2>
+
+@using (Html.BeginForm("Index", "StoricoServiziAggiuntivi", FormMethod.Post, new { @class = "row g-3 needs-validation", novalidate = "true" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdPrenotazione, "Prenotazione", new { @class = "control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.IdPrenotazione, new SelectList(ViewBag.Prenotazioni, "IdPrenotazione", "DataPrenotazione"), "Seleziona una prenotazione", new { @class = $"form-select {(ViewData.ModelState.IsValidField("IdPrenotazione") ? "" : "is-invalid")}" })
+            @Html.ValidationMessageFor(model => model.IdPrenotazione, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-primary mt-3" type="submit">Vai al Checkout!</button>
+    </div>
+}
