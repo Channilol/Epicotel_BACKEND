@@ -47,6 +47,13 @@
         <h1 id="title">EPICOTEL</h1>
         <p class="lead">Epicotel, l'hotel diretto da Epicode.</p>
 
+        @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            <div class="alert alert-warning" role="alert">
+                Prima di navigare nel sito devi fare il login!
+            </div>
+        }
+
         <div class="homepageBot">
             <div>
                 <h2>CLIENTI</h2>
