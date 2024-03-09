@@ -9,17 +9,45 @@ using System.Web.Mvc;
 
 namespace Epicotel.Controllers
 {
+    [Authorize]
     public class ClientiController : Controller
     {
         public string connString = ConfigurationManager.ConnectionStrings["DBconn"].ConnectionString;
-
-        [Authorize]
+        
         public ActionResult Index()
         {
+            var conn = new SqlConnection(connString);
+            conn.Open();
+            var cmd = new SqlCommand("SELECT * FROM Clienti", conn);
+            var reader = cmd.ExecuteReader();
+
+            var clienti = new List<Clienti>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    var cliente = new Clienti()
+                    {
+                        IdCliente = (int)reader["IdCliente"],
+                        Cognome = reader["Cognome"].ToString(),
+                        Nome = reader["Nome"].ToString(),
+                        Citta = reader["Citta"].ToString(),
+                        Provincia = reader["Provincia"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        Telefono = (int)reader["Telefono"],
+                        Cellulare = (int)reader["Cellulate"],
+                        CodiceFiscale = reader["CodiceFiscale"].ToString(),
+                    };
+                    clienti.Add(cliente);
+                }
+            }
+            reader.Close();
+
+            ViewBag.Clienti = clienti;
+
             return View();
         }
-
-        [Authorize]
+        
         public ActionResult Add()
         {
             return View();
@@ -45,8 +73,8 @@ namespace Epicotel.Controllers
                 register.Parameters.AddWithValue("@CodiceFiscale", cliente.CodiceFiscale);
                 register.ExecuteNonQuery();
 
-                return RedirectToAction("Index", "Home");
-
+                TempData["Cliente"] = true;
+                return RedirectToAction("Index");
             }
 
             return View();

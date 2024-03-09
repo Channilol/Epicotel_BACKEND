@@ -1,12 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Applicazione ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles", required: false)
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
@@ -21,8 +22,8 @@
                     @if (HttpContext.Current.User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Clienti", "Index", "Clienti", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Prenotazioni", "Add", "Prenotazioni", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Storico Prenotazioni", "Add", "ServiziAggiunti", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Prenotazioni", "Index", "Prenotazioni", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Aggiungi un Servizio", "Add", "ServiziAggiunti", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Checkout", "Index", "StoricoServiziAggiuntivi", new { area = "" }, new { @class = "nav-link" })</li>
                         using (Html.BeginForm("Logout", "Login"))
                         {

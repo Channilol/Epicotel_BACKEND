@@ -4,60 +4,45 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Registrazione Cliente</h2>
-@using (Html.BeginForm("Add", "Clienti", FormMethod.Post, new { @class = "row g-3", novalidate = "true" }))
+@Html.ActionLink("Aggiunti un Cliente", "Add", "Clienti", new { area = "" }, new { @class = "btn btn-primary my-4" })
+
+@if (TempData["Cliente"] != null)
 {
-    @Html.AntiForgeryToken()
-
-    <div class="col-6 form-group">
-        @Html.LabelFor(model => model.Cognome, new { htmlAttributes = new { @class = "form-label" } })
-        @Html.EditorFor(model => model.Cognome, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("Email") ? "" : "is-invalid")}" } })
-        @Html.ValidationMessageFor(model => model.Cognome, null, new { @class = "invalid-feedback" })
-    </div>
-
-    <div class="col-6 form-group">
-        @Html.LabelFor(model => model.Nome, new { htmlAttributes = new { @class = "form-label" } })
-        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("Email") ? "" : "is-invalid")}" } })
-        @Html.ValidationMessageFor(model => model.Nome, null, new { @class = "invalid-feedback" })
-    </div>
-
-    <div class="col-6 form-group">
-        @Html.LabelFor(model => model.Citta, new { htmlAttributes = new { @class = "form-label" } })
-        @Html.EditorFor(model => model.Citta, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("Email") ? "" : "is-invalid")}" } })
-        @Html.ValidationMessageFor(model => model.Citta, null, new { @class = "invalid-feedback" })
-    </div>
-
-    <div class="col-6 form-group">
-        @Html.LabelFor(model => model.Provincia, new { htmlAttributes = new { @class = "form-label" } })
-        @Html.EditorFor(model => model.Provincia, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("Email") ? "" : "is-invalid")}" } })
-        @Html.ValidationMessageFor(model => model.Provincia, null, new { @class = "invalid-feedback" })
-    </div>
-
-    <div class="col-6 form-group">
-        @Html.LabelFor(model => model.Email, new { htmlAttributes = new { @class = "form-label" } })
-        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("Email") ? "" : "is-invalid")}" } })
-        @Html.ValidationMessageFor(model => model.Email, null, new { @class = "invalid-feedback" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-label" } })
-        @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("PartitaIVA") ? "" : "is-invalid")}", id = "partitaIva" } })
-        @Html.ValidationMessageFor(model => model.Telefono, null, new { @class = "invalid-feedback" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Cellulare, new { htmlAttributes = new { @class = "form-label" } })
-        @Html.EditorFor(model => model.Cellulare, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("PartitaIVA") ? "" : "is-invalid")}", id = "partitaIva" } })
-        @Html.ValidationMessageFor(model => model.Cellulare, null, new { @class = "invalid-feedback" })
-    </div>
-
-    <div class="col-6 form-group">
-        @Html.LabelFor(model => model.CodiceFiscale, new { htmlAttributes = new { @class = "form-label" } })
-        @Html.EditorFor(model => model.CodiceFiscale, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("Email") ? "" : "is-invalid")}" } })
-        @Html.ValidationMessageFor(model => model.CodiceFiscale, null, new { @class = "invalid-feedback" })
-    </div>
-
-    <div class="col-12">
-        <button class="btn btn-primary mt-3" type="submit">Registrati</button>
+    <div class="alert alert-success" role="alert">
+        Cliente registrato con successo!
     </div>
 }
+
+<h2>Lista Clienti</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">IdCliente</th>
+            <th scope="col">Cognome</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Città</th>
+            <th scope="col">Provincia</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Cellulare</th>
+            <th scope="col">Codice Fiscale</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @foreach (var servizio in ViewBag.Clienti)
+        {
+            <tr>
+                <td>@servizio.IdCliente</td>
+                <td>@servizio.Cognome</td>
+                <td>@servizio.Nome</td>
+                <td>@servizio.Citta</td>
+                <td>@servizio.Provincia</td>
+                <td>@servizio.Email</td>
+                <td>@servizio.Telefono</td>
+                <td>@servizio.Cellulare</td>
+                <td>@servizio.CodiceFiscale</td>
+            </tr>
+        }
+    </tbody>
+</table>

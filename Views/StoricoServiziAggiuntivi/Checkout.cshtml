@@ -4,4 +4,82 @@
     ViewBag.Title = "Checkout";
 }
 
-<h2>Checkout</h2>
+@section styles {
+    <style>
+        .checkoutPage {
+            width: 80%;
+            border: 1px solid #ccc;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .checkoutPrice {
+            margin-top: 100px;
+            text-align: right;
+        }
+    </style>
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="checkoutPage">
+            <h1>Epicotel Checkout</h1>
+
+            <hr />
+
+            <h3>Dettagli prenotazione</h3>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Numero Camera</th>
+                        <th scope="col">Periodo Prenotazione</th>
+                        <th scope="col">Tariffa Camera</th>
+                        <th scope="col">Caparra Camera</th>
+                        <th scope="col">Tipo Pensione</th>
+                        <th scope="col">Prezzo Pensione</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr>
+                        <td>@ViewBag.Checkout.IdCamera</td>
+                        <td class="periodo">@ViewBag.Checkout.Periodo</td>
+                        <td>@ViewBag.Checkout.Tariffa€</td>
+                        <td>@ViewBag.Checkout.Caparra€</td>
+                        <td>@ViewBag.Checkout.TipoPensione</td>
+                        <td>@ViewBag.Checkout.PrezzoPensione€</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr />
+
+            <h3>Lista servizi aggiuntivi</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Tipo Servizio</th>
+                        <th scope="col">Data Servizio</th>
+                        <th scope="col">Prezzo Servizio</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    @if (ViewBag.Servizi != null && ViewBag.Servizi.Count > 0)
+                    {
+                        foreach (var servizio in ViewBag.Servizi)
+                        {
+                            <tr>
+                                <td>@servizio.TipoServizio</td>
+                                <td class="periodo">@servizio.DataServizio</td>
+                                <td>@servizio.PrezzoServizio€</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="checkoutPrice">
+                <h3><strong>Prezzo totale</strong></h3>
+                <hr />
+                <h3>@ViewBag.Checkout.PrezzoCheckout€</h3>
+            </div>
+        </div>
+    </div>
+</div>

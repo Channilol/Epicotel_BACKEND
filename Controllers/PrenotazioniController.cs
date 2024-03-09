@@ -15,6 +15,34 @@ namespace Epicotel.Controllers
         public string connString = ConfigurationManager.ConnectionStrings["DBconn"].ConnectionString;
         public ActionResult Index()
         {
+            var conn = new SqlConnection(connString);
+            conn.Open();
+            var cmd = new SqlCommand("SELECT pre.IdPrenotazione, pre.DataPrenotazione, pre.SoggiornoDa, pre.SoggiornoA, pre.Tariffa, pen.TipoPensione, cli.Nome, cli.Cognome, pre.IdCamera FROM Prenotazioni pre LEFT JOIN Pensioni pen ON pre.IdPensione = pen.IdPensione LEFT JOIN Clienti cli ON pre.IdCliente = cli.IdCliente", conn);
+            var reader = cmd.ExecuteReader();
+
+            var prenotazioni = new List<Prenotazioni>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    var prenotazione = new Prenotazioni()
+                    {
+                        IdPrenotazione = (int)reader["IdPrenotazione"],
+                        DataPrenotazione = reader["DataPrenotazione"].ToString(),
+                        SoggiornoDa = reader["SoggiornoDa"].ToString(),
+                        SoggiornoA = reader["SoggiornoA"].ToString(),
+                        Tariffa = (decimal)reader["Tariffa"],
+                        TipoPensione = reader["TipoPensione"].ToString(),
+                        NomeCliente = reader["Nome"].ToString() + " " + reader["Cognome"].ToString(),
+                        IdCamera = (int)reader["IdCamera"],
+                    };
+                    prenotazioni.Add(prenotazione);
+                }
+            }
+            reader.Close();
+
+            ViewBag.Prenotazioni = prenotazioni;
+
             return View();
         }
 
@@ -134,10 +162,9 @@ namespace Epicotel.Controllers
                 insrtStorico.Parameters.AddWithValue("@PrezzoTotale", prezzoTot);
                 insrtStorico.ExecuteNonQuery();
 
-                return RedirectToAction("Index", "Home");
+                TempData["Prenotazione"] = true;
+                return RedirectToAction("Index");
             //}
-
-            return View();
         }
     }
 }

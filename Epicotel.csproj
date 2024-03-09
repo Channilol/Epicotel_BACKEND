@@ -196,10 +196,11 @@
     <Content Include="Views\ServiziAggiunti\Add.cshtml" />
     <Content Include="Views\StoricoServiziAggiuntivi\Index.cshtml" />
     <Content Include="Views\StoricoServiziAggiuntivi\Checkout.cshtml" />
+    <Content Include="Views\Clienti\Add.cshtml" />
+    <Content Include="Views\Prenotazioni\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Spedizioni\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

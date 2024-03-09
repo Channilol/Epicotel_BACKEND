@@ -1,0 +1,46 @@
+﻿@model Epicotel.Models.Prenotazioni
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.ActionLink("Aggiunti una Prenotazione", "Add", "Prenotazioni", new { area = "" }, new { @class = "btn btn-primary my-4" })
+
+@if (TempData["Prenotazione"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        Prenotazione registrata con successo!
+    </div>
+}
+
+<h2>Lista Prenotazioni</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id Prenotazione</th>
+            <th scope="col">Data Prenotazione</th>
+            <th scope="col">Inizio Soggiorno</th>
+            <th scope="col">Fine Soggiorno</th>
+            <th scope="col">Costo Prenotazione</th>
+            <th scope="col">Pensione</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Numero Camera</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @foreach (var prenotazione in ViewBag.Prenotazioni)
+        {
+            <tr>
+                <td>@prenotazione.IdPrenotazione</td>
+                <td>@prenotazione.DataPrenotazione</td>
+                <td>@prenotazione.SoggiornoDa</td>
+                <td>@prenotazione.SoggiornoA</td>
+                <td>@prenotazione.Tariffa</td>
+                <td>@prenotazione.TipoPensione</td>
+                <td>@prenotazione.NomeCliente</td>
+                <td>@prenotazione.IdCamera</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -12,5 +12,7 @@ namespace Epicotel.Models
         public string TipoServizio { get; set; }
 
         public decimal PrezzoServizio { get; set; }
+
+        public string DataServizio { get; set; }
     }
 }

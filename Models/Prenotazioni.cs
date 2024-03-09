@@ -42,6 +42,10 @@ namespace Epicotel.Models
         [Display(Name = "Tariffa")]
         public decimal Tariffa { get; set; }
 
+        public string TipoPensione { get; set; }
+
+        public string NomeCliente { get; set; }
+
     }
 
 }
