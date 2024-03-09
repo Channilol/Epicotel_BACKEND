@@ -119,7 +119,9 @@ namespace Epicotel.Controllers
                 cmdInsert.Parameters.AddWithValue("@PrezzoTotale", prezzoServizio);
                 cmdInsert.ExecuteNonQuery();
 
-                return RedirectToAction("Index", "Home");
+                TempData["Servizio"] = true;
+
+                return RedirectToAction("Index");
             }
             else
             {

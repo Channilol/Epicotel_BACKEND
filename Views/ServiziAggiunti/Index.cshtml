@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Servizi</h2>
+
+@if (TempData["Servizio"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        Il servizio è stato aggiunto alla prenotazione!
+    </div>
+}
