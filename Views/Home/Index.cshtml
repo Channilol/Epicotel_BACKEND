@@ -2,9 +2,81 @@
     ViewBag.Title = "Home Page";
 }
 
+@section styles {
+    <style>
+        .homepageBot {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .homepageBot > div {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            width: 300px;
+            height: 300px;
+            background-color: transparent;
+            border: 3px solid #ccc;
+            color: #141414!important;
+            transition: border 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+
+        .homepageBot h2 {
+            font-size: 2.5em;
+        }
+
+            .homepageBot > div:hover {
+                background-color: #0d6efd;
+                border: 1px solid #0d6efd;
+                color: white!important;
+            }
+
+        .btnsDiv {
+            display: flex;
+            flex-direction: column;
+        }
+
+    </style>  
+}
+
 <main>
     <section class="row" aria-labelledby="aspnetTitle">
         <h1 id="title">EPICOTEL</h1>
         <p class="lead">Epicotel, l'hotel diretto da Epicode.</p>
+
+        <div class="homepageBot">
+            <div>
+                <h2>CLIENTI</h2>
+                <div class="btnsDiv">
+                    @Html.ActionLink("Lista clienti", "Index", "Clienti", new { area = "" }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Aggiungi un Cliente", "Add", "Clienti", new { area = "" }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+
+            <div>
+                <h2>PRENOTAZIONI</h2>
+                <div class="btnsDiv">
+                    @Html.ActionLink("Lista prenotazioni", "Index", "Prenotazioni", new { area = "" }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Aggiungi una prenotazione", "Add", "Prenotazioni", new { area = "" }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+
+            <div>
+                <h2>SERVIZI</h2>
+                <div class="btnsDiv">
+                    @Html.ActionLink("Aggiungi un Cliente", "Add", "ServiziAggiunti", new { area = "" }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+
+            <div>
+                <h2>CHECKOUT</h2>
+                <div class="btnsDiv">
+                    @Html.ActionLink("Vai al Checkout", "Index", "StoricoServiziAggiuntivi", new { area = "" }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        </div>
     </section>
 </main>
